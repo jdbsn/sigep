@@ -30,11 +30,23 @@
                 <td th:text="${vehicle.make} + ' ' + ${vehicle.model}" />
                 <td th:text="${vehicle.color}" />
                 <td th:text="${vehicle.ownerId}" />
-                <td><a th:href="@{/products/{id}(id = ${vehicle.idVehicle})}">Detalhar</a></td>
-                <td><a th:href="@{/products/{id}/delete(id = ${vehicle.idVehicle})}">Apagar</a></td>
+                <td><a th:href="@{/vehicles/{id}(id = ${vehicle.idVehicle})}">Detalhar</a></td>
+                <td><a th:href="@{/vehicles/{id}/delete(id = ${vehicle.idVehicle})}">Apagar</a></td>
             </tr>
             </tbody>
         </table>
+    </div>
+
+    <form action="#" th:action="@{/vehicles/search}" th:object="${vehicleRecordDto}" method="post">
+        <div class="row">
+            <div class="form-group col">
+                <label>Placa</label>
+                <input type="text" class="form-control" th:field="*{registrationNumber}" />
+            </div>
+            <button class="btn btn-success" type="submit">Registrar</button>
+        </div>
+    </form>
+    <br>
     </div>
 
     </body>
