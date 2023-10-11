@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <title>Registro de Veículo</title>
+  </head>
+  <body>
+
+    <hr>
+    <h2>Registrar veículo</h2>
+
+    <hr>
+    <a href="/">Voltar</a>
+    <br>
+
+    <div class="container border">
+      <br>
+      <form action="#" th:action="@{/vehicles/register}" th:object="${vehicleRecordDto}" method="post">
+        <div class="row">
+          <div class="form-group col">
+            <label>Placa</label>
+            <input type="text" class="form-control" th:field="*{registrationNumber}" />
+          </div>
+          <div class="form-group col">
+            <label>Cidade</label>
+            <input type="text" class="form-control" th:field="*{city}" />
+          </div>
+          <div class="form-group col">
+            <label>Estado</label>
+            <input type="text" class="form-control" th:field="*{state}" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col">
+            <label>Marca</label>
+            <input type="text" class="form-control" th:field="*{make}" />
+          </div>
+          <div class="form-group col">
+            <label>Modelo</label>
+            <input type="text" class="form-control" th:field="*{model}" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Cor</label>
+          <input type="text" class="form-control" th:field="*{color}" />
+        </div>
+        <div class="form-group">
+          <label>CPF do dono</label>
+          <input type="text" class="form-control" th:field="*{ownerId}" />
+        </div>
+        <br>
+        <button class="btn btn-success" type="submit">Registrar</button>
+      </form>
+      <br>
+    </div>
+
+  </body>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</html>

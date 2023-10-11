@@ -19,12 +19,17 @@ public class VehicleModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID idVehicle;
-    @Setter(AccessLevel.PRIVATE)
+    @Setter(AccessLevel.NONE)
     private String registrationNumber;
     private String city;
     private State state;
     private String make;
+    private String model;
     private String color;
-    private String power;
+    private String ownerId;
+
+    public VehicleModel(String registrationNumber) {
+        this.registrationNumber = registrationNumber;
+    }
 
 }
