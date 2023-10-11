@@ -28,6 +28,10 @@ public class VehicleModel implements Serializable {
     private String color;
     private String ownerId;
 
+    public VehicleModel() {
+
+    }
+
     public VehicleModel(String registrationNumber) {
         this.registrationNumber = registrationNumber;
     }
