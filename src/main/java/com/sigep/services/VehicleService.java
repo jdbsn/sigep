@@ -1,6 +1,7 @@
 package com.sigep.services;
 
 import com.sigep.dtos.VehicleRecordDto;
+import com.sigep.enums.State;
 import com.sigep.models.VehicleModel;
 import com.sigep.repositories.VehicleRepository;
 import org.springframework.beans.BeanUtils;
@@ -22,7 +23,7 @@ public class VehicleService {
     }
 
     public void register(VehicleRecordDto vehicleDto) {
-        var vehicleModel = new VehicleModel(vehicleDto.registrationNumber());
+        var vehicleModel = new VehicleModel(vehicleDto.registrationNumber().toUpperCase());
         BeanUtils.copyProperties(vehicleDto, vehicleModel);
         vehicleRepository.save(vehicleModel);
     }
@@ -37,9 +38,15 @@ public class VehicleService {
     }
 
     public VehicleModel findByRegistration(String registrationNumber) {
-        VehicleModel vehicle = vehicleRepository.findByRegistrationNumber(registrationNumber);
+        VehicleModel vehicle = vehicleRepository.findByRegistrationNumber(registrationNumber.toUpperCase());
 
         return vehicle;
+    }
+
+    public List<VehicleModel> findByRegistration(State state) {
+        List<VehicleModel> vehicles = vehicleRepository.findByState(state);
+
+        return vehicles;
     }
 
 }

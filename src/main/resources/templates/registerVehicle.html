@@ -6,20 +6,16 @@
   </head>
   <body>
 
-    <hr>
-    <h2>Registrar veículo</h2>
-
-    <hr>
-    <a href="/">Voltar</a>
-    <br>
+    <nav th:replace="~{fragments/navbar :: navbar}"></nav>
 
     <div class="container border">
+      <h2>Registrar veículo</h2>
       <br>
       <form action="#" th:action="@{/vehicles/register}" th:object="${vehicleRecordDto}" method="post">
         <div class="row">
           <div class="form-group col">
             <label>Placa</label>
-            <input type="text" class="form-control" th:field="*{registrationNumber}" />
+            <input type="text" class="form-control" th:field="*{registrationNumber}" id="registrationNumber" />
           </div>
           <div class="form-group col">
             <label>Cidade</label>
@@ -27,7 +23,7 @@
           </div>
           <div class="form-group col">
             <label>Estado</label>
-            <input type="text" class="form-control" th:field="*{state}" />
+            <select class="form-select" id="state" th:field="*{state}"></select>
           </div>
         </div>
         <div class="row">
@@ -40,9 +36,15 @@
             <input type="text" class="form-control" th:field="*{model}" />
           </div>
         </div>
-        <div class="form-group">
-          <label>Cor</label>
-          <input type="text" class="form-control" th:field="*{color}" />
+        <div class="row">
+          <div class="form-group col">
+            <label>Cor</label>
+            <input type="text" class="form-control" th:field="*{color}" />
+          </div>
+          <div class="form-group col">
+            <label>Ano</label>
+            <input type="text" class="form-control" th:field="*{year}" />
+          </div>
         </div>
         <div class="form-group">
           <label>CPF do dono</label>
@@ -52,9 +54,15 @@
         <button class="btn btn-success" type="submit">Registrar</button>
       </form>
       <br>
+      <a href="/vehicles">Voltar</a>
     </div>
 
   </body>
+  <link th:href="@{/css/styles.css}" rel="stylesheet"/>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js" integrity="sha512-oJCa6FS2+zO3EitUSj+xeiEN9UTr+AjqlBZO58OPadb2RfqwxHpjTU8ckIC8F4nKvom7iru2s8Jwdo+Z8zm0Vg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script type="text/javascript" th:src="@{/js/mask.js}"></script>
+  <script type="text/javascript" th:src="@{/js/selectStates.js}"></script>
 </html>

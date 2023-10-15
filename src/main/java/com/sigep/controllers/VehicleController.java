@@ -1,15 +1,14 @@
 package com.sigep.controllers;
 
 import com.sigep.dtos.VehicleRecordDto;
+import com.sigep.enums.State;
 import com.sigep.services.VehicleService;
 import jakarta.validation.Valid;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -25,7 +24,7 @@ public class VehicleController {
     }
 
     @GetMapping("/vehicles")
-    public String listVehicles(Model model, VehicleRecordDto vehicleDto) {
+    public String listVehicles(@NotNull Model model, VehicleRecordDto vehicleDto) {
         var vehicles = vehicleService.findAll();
         model.addAttribute("vehicles", vehicles);
 
@@ -45,8 +44,13 @@ public class VehicleController {
     }
 
     @PostMapping("/vehicles/search")
-    public String searchVehicle(@ModelAttribute @Valid VehicleRecordDto vehicleDto) {
+    public String searchVehicle(@ModelAttribute @Valid VehicleRecordDto vehicleDto, Model model) {
         var vehicle = vehicleService.findByRegistration(vehicleDto.registrationNumber());
+
+        if(vehicle == null) {
+            model.addAttribute("error", "Veículo não encontrado.");
+            return "errorPage";
+        }
 
         return "redirect:/vehicles/" + vehicle.getIdVehicle();
     }
@@ -61,6 +65,13 @@ public class VehicleController {
         }
         model.addAttribute("vehicle", vehicle);
         return "detailVehicle";
+    }
+
+    @GetMapping("/vehicles/search")
+    public String showSearchResult(@RequestParam State state, Model model) {
+        var vehicles = vehicleService.findByRegistration(state);
+        model.addAttribute("vehicles", vehicles);
+        return "listVehicles";
     }
 
 }

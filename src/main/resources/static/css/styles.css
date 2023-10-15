@@ -1,0 +1,13 @@
+.navbar {
+    background-color: #016A70;
+}
+
+#nav-title {
+    font-size: 32px;
+    color: white;
+    margin-left: 8px;
+}
+
+#nav-link {
+    color: white;
+}

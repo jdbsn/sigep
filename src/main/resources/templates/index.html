@@ -5,19 +5,30 @@
         <title>SIGEP</title>
     </head>
     <body>
-    Bem vindo
 
-    <form action="#" th:action="@{/vehicles/search}" th:object="${vehicleRecordDto}" method="post">
-        <div class="row">
-            <div class="form-group col">
-                <label>Placa</label>
-                <input type="text" class="form-control" th:field="*{registrationNumber}" />
+        <nav th:replace="~{fragments/navbar :: navbar}"></nav>
+
+
+        <div class="card" id="cardSearch">
+            <h5 class="card-header">Pesquisar placa</h5>
+            <div class="card-body">
+                <form class="row g-3" action="#" th:action="@{/vehicles/search}" th:object="${vehicleRecordDto}" method="post">
+                    <div class="col-auto" id="divInputPlate">
+                        <input type="text" class="form-control" th:field="*{registrationNumber}" placeholder="Placa" id="registrationNumber" STYLE="width: 150px">
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary mb-3">Pesquisar</button>
+                    </div>
+                </form>
             </div>
-            <button class="btn btn-success" type="submit">Registrar</button>
         </div>
-    </form>
 
     </body>
+    <link th:href="@{/css/styleIndex.css}" rel="stylesheet"/>
+    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js" integrity="sha512-oJCa6FS2+zO3EitUSj+xeiEN9UTr+AjqlBZO58OPadb2RfqwxHpjTU8ckIC8F4nKvom7iru2s8Jwdo+Z8zm0Vg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script type="text/javascript" th:src="@{/js/mask.js}"></script>
 </html>

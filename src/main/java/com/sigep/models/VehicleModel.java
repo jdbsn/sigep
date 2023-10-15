@@ -27,7 +27,7 @@ public class VehicleModel implements Serializable {
     private String model;
     private String color;
     private String ownerId;
-    private int ano;
+    private int year;
 
     public VehicleModel() {
 
