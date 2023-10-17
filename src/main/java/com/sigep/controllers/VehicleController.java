@@ -37,8 +37,11 @@ public class VehicleController {
     }
 
     @PostMapping("/vehicles/register")
-    public String registerVehicle(@ModelAttribute @Valid VehicleRecordDto vehicleDto) {
-        vehicleService.register(vehicleDto);
+    public String registerVehicle(@ModelAttribute @Valid VehicleRecordDto vehicleDto, Model model) {
+        if(!vehicleService.register(vehicleDto)) {
+            model.addAttribute("error", "Placa já cadastrada.");
+            return "errorPage";
+        }
 
         return "redirect:/vehicles";
     }
@@ -72,6 +75,16 @@ public class VehicleController {
         var vehicles = vehicleService.findByRegistration(state);
         model.addAttribute("vehicles", vehicles);
         return "listVehicles";
+    }
+
+    @PostMapping("/vehicles/{id}/delete")
+    public String deleteVehicle(@PathVariable(value = "id") UUID id, Model model) {
+        if(!vehicleService.deleteById(id)) {
+            model.addAttribute("error", "Veículo não encontrado.");
+            return "errorPage";
+        };
+
+        return "redirect:/vehicles";
     }
 
 }

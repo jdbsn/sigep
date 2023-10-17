@@ -22,10 +22,17 @@ public class VehicleService {
         return vehicleRepository.findAll();
     }
 
-    public void register(VehicleRecordDto vehicleDto) {
+    public boolean register(VehicleRecordDto vehicleDto) {
+        VehicleModel vehicle = findByRegistration(vehicleDto.registrationNumber());
+
+        if(vehicle != null) {
+            return false;
+        }
+
         var vehicleModel = new VehicleModel(vehicleDto.registrationNumber().toUpperCase());
         BeanUtils.copyProperties(vehicleDto, vehicleModel);
         vehicleRepository.save(vehicleModel);
+        return true;
     }
 
     public VehicleModel findById(UUID id) {
@@ -47,6 +54,17 @@ public class VehicleService {
         List<VehicleModel> vehicles = vehicleRepository.findByState(state);
 
         return vehicles;
+    }
+
+    public boolean deleteById(UUID id) {
+        VehicleModel vehicle = findById(id);
+
+        if(vehicle == null) {
+            return false;
+        }
+
+        vehicleRepository.deleteById(id);
+        return true;
     }
 
 }
