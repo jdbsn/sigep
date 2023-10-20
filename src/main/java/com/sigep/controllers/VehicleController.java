@@ -41,8 +41,20 @@ public class VehicleController {
         return "registerVehicle";
     }
 
+    @PostMapping("/vehicles/search")
+    public String registerVehicle(@ModelAttribute @Valid VehicleRecordDto vehicleDto, BindingResult resultModel, Model model) {
+        var vehicle = vehicleService.findByRegistration(vehicleDto.registrationNumber());
+
+        if(vehicle == null) {
+            model.addAttribute("error", "Veículo não encontrado.");
+            return "errorPage";
+        }
+
+        return "redirect:/vehicles/" + vehicle.getIdVehicle();
+    }
+
     @PostMapping("/vehicles/register")
-    public String registerVehicle(@ModelAttribute @Valid VehicleRecordDto vehicleDto, BindingResult result) {
+    public String searchVehicle(@ModelAttribute @Valid VehicleRecordDto vehicleDto, Model model, BindingResult result) {
         boolean registration = vehicleService.register(vehicleDto);
 
         if(!registration) {
@@ -52,18 +64,6 @@ public class VehicleController {
         }
 
         return "redirect:/vehicles";
-    }
-
-    @PostMapping("/vehicles/search")
-    public String searchVehicle(@ModelAttribute @Valid VehicleRecordDto vehicleDto, Model model) {
-        var vehicle = vehicleService.findByRegistration(vehicleDto.registrationNumber());
-
-        if(vehicle == null) {
-            model.addAttribute("error", "Veículo não encontrado.");
-            return "errorPage";
-        }
-
-        return "redirect:/vehicles/" + vehicle.getIdVehicle();
     }
 
     @GetMapping("/vehicles/{id}")

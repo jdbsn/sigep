@@ -46,7 +46,7 @@
         </div>
 
         <div class="container border">
-            <h2 class="text-center" id="list-title" style="margin: 20px;">Lista de veículos</h2>
+            <h2 class="text-center" id="list-title">Lista de veículos</h2>
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -68,11 +68,17 @@
                     <td th:text="${vehicle.make} + ' ' + ${vehicle.model}" />
                     <td th:text="${vehicle.color}" />
                     <td th:text="${vehicle.ownerId}" />
-                    <td><a th:href="@{/vehicles/{id}(id = ${vehicle.idVehicle})}">Detalhar</a></td>
+                    <td>
+                        <form class="row g-3" action="#" th:action="@{/vehicles/{id}(id = ${vehicle.idVehicle})}" method="get">
+                            <div class="col-auto">
+                                <button type="submit" class="btn btn-warning">Detalhar</button>
+                            </div>
+                        </form>
+                    </td>
                     <td>
                         <form class="row g-3" action="#" th:action="@{/vehicles/{id}/delete(id = ${vehicle.idVehicle})}" method="post">
                             <div class="col-auto">
-                                <button type="submit" class="btn btn-primary mb-3">Apagar</button>
+                                <button type="submit" class="btn btn-danger">Apagar</button>
                             </div>
                         </form>
                     </td>
