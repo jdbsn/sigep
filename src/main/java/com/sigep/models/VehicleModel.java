@@ -2,9 +2,8 @@ package com.sigep.models;
 
 import com.sigep.enums.State;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.Setter;
+import lombok.*;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -12,6 +11,9 @@ import java.util.UUID;
 @Entity
 @Table(name = "vehicles")
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class VehicleModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -20,6 +22,8 @@ public class VehicleModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID idVehicle;
     @Setter(AccessLevel.NONE)
+    @Column(unique=true)
+    @NotNull
     private String registrationNumber;
     private String city;
     private State state;
@@ -28,10 +32,6 @@ public class VehicleModel implements Serializable {
     private String color;
     private String ownerId;
     private int year;
-
-    public VehicleModel() {
-
-    }
 
     public VehicleModel(String registrationNumber) {
         this.registrationNumber = registrationNumber;

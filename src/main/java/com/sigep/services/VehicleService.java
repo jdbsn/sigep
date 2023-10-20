@@ -50,7 +50,7 @@ public class VehicleService {
         return vehicle;
     }
 
-    public List<VehicleModel> findByRegistration(State state) {
+    public List<VehicleModel> findByState(State state) {
         List<VehicleModel> vehicles = vehicleRepository.findByState(state);
 
         return vehicles;

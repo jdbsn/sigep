@@ -28,7 +28,10 @@
                 <div class="col-lg-2 align-self-center">
                     <form class="row g-6" action="/vehicles/search" method="get">
                         <div class="col-auto" style="width: 100%;">
-                            <select class="form-select" id="state" name="state" onchange="this.form.submit();"></select>
+                            <select class="form-select" id="state" name="state" onchange="this.form.submit();">
+                                <option disabled selected>Estado</option>
+                                <option th:each="state : ${states}" th:value="${state}" th:text="${state}" th:selected="${filters==state}"></option>
+                            </select>
                         </div>
                     </form>
                 </div>

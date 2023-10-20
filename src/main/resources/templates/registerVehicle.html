@@ -11,15 +11,18 @@
     <div class="container border">
       <h2>Registrar veículo</h2>
       <br>
-      <form action="#" th:action="@{/vehicles/register}" th:object="${vehicleRecordDto}" method="post">
+      <form action="#" th:action="@{/vehicles/register}" th:object="${vehicleRecordDto}" method="post" id="formRegister">
         <div class="row">
           <div class="form-group col">
             <label>Placa</label>
             <input type="text" class="form-control" th:field="*{registrationNumber}" id="registrationNumber" />
+            <div th:if="${#fields.hasErrors('global')}">
+              <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
+            </div>
           </div>
           <div class="form-group col">
             <label>Cidade</label>
-            <input type="text" class="form-control" th:field="*{city}" />
+            <input type="text" class="form-control"  id="city" th:field="*{city}" />
           </div>
           <div class="form-group col">
             <label>Estado</label>
@@ -29,21 +32,21 @@
         <div class="row">
           <div class="form-group col">
             <label>Marca</label>
-            <input type="text" class="form-control" th:field="*{make}" />
+            <input type="text" class="form-control" id="make" th:field="*{make}" />
           </div>
           <div class="form-group col">
             <label>Modelo</label>
-            <input type="text" class="form-control" th:field="*{model}" />
+            <input type="text" class="form-control" id="model" th:field="*{model}" />
           </div>
         </div>
         <div class="row">
           <div class="form-group col">
             <label>Cor</label>
-            <input type="text" class="form-control" th:field="*{color}" />
+            <input type="text" class="form-control" id="color" th:field="*{color}" />
           </div>
           <div class="form-group col">
             <label>Ano</label>
-            <input type="text" class="form-control" th:field="*{year}" />
+            <select class="form-select" id="year" th:field="*{year}"></select>
           </div>
         </div>
         <div class="form-group">
@@ -65,4 +68,11 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   <script type="text/javascript" th:src="@{/js/mask.js}"></script>
   <script type="text/javascript" th:src="@{/js/selectStates.js}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.js" crossorigin="anonymous"></script>
+  <script type="text/javascript" th:src="@{/js/messages_pt_BR.js}"></script>
+  <script type="text/javascript" th:src="@{/js/selectYear.js}"></script>
+  <script>
+
+  </script>
 </html>

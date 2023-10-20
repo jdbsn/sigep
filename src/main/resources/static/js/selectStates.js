@@ -7,6 +7,7 @@ fetch("https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome"
 
       option.setAttribute('value', d.sigla);
       option.textContent = d.sigla;
+      option.value = d.sigla;
 
       select.appendChild(option);
     })
