@@ -1,11 +1,14 @@
 package com.sigep.services;
 
+import com.sigep.dtos.FilterDTO;
 import com.sigep.dtos.VehicleRecordDto;
 import com.sigep.enums.State;
 import com.sigep.models.VehicleModel;
 import com.sigep.repositories.VehicleRepository;
+import com.sigep.specifications.VehicleSpecification;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -65,6 +68,13 @@ public class VehicleService {
 
         vehicleRepository.deleteById(id);
         return true;
+    }
+
+    public List<VehicleModel> findWithFilters(FilterDTO filter) {
+        return vehicleRepository.findAll(Specification
+                .where(VehicleSpecification.hasState(filter.state()))
+                .and(VehicleSpecification.hasMake(filter.make()))
+                .and(VehicleSpecification.hasYear(filter.year())));
     }
 
 }

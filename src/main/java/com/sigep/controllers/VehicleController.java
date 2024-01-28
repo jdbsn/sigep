@@ -1,5 +1,6 @@
 package com.sigep.controllers;
 
+import com.sigep.dtos.FilterDTO;
 import com.sigep.dtos.VehicleRecordDto;
 import com.sigep.enums.State;
 import com.sigep.services.VehicleService;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 @Controller
@@ -79,14 +79,18 @@ public class VehicleController {
     }
 
     @GetMapping("/vehicles/search")
-    public String showSearchResult(@RequestParam Map<String, String> filters, Model model) {
-        var vehicles = vehicleService.findByState(State.valueOf(filters.get("state")));
+    public String showSearchResult(FilterDTO filters, Model model) {
+        var vehicles = vehicleService.findWithFilters(filters);
 
         List<State> states = Arrays.asList(State.values());
 
         model.addAttribute("vehicles", vehicles);
         model.addAttribute("states", states);
-        model.addAttribute("filters", State.valueOf(filters.get("state")));
+
+        if(filters.state() != null) {
+            model.addAttribute("st", State.valueOf(filters.state()));
+        }
+        model.addAttribute("mk", filters.make());
 
         return "listVehicles";
     }
