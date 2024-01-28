@@ -48,15 +48,11 @@ public class VehicleService {
     }
 
     public VehicleModel findByRegistration(String registrationNumber) {
-        VehicleModel vehicle = vehicleRepository.findByRegistrationNumber(registrationNumber.toUpperCase());
-
-        return vehicle;
+        return vehicleRepository.findByRegistrationNumber(registrationNumber.toUpperCase());
     }
 
     public List<VehicleModel> findByState(State state) {
-        List<VehicleModel> vehicles = vehicleRepository.findByState(state);
-
-        return vehicles;
+        return vehicleRepository.findByState(state);
     }
 
     public boolean deleteById(UUID id) {

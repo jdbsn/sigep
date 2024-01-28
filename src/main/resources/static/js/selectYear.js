@@ -1,9 +1,14 @@
-$(function () {
-    var currYear = new Date().getFullYear(), option, i;
+function populateYearsSelect() {
+    var select = document.getElementById("year");
+    var currentYear = new Date().getFullYear();
+    var minYear = 1900;
 
-    for (i = 1900; i < currYear + 2; i += 1) {
-        option = $(document.createElement('option')).val(i).text(i);
-        option.prop('selected', i === currYear + 1);
-        $('#year').append(option);
+    for (var year = currentYear; year >= minYear; year--) {
+        var option = document.createElement("option");
+        option.value = year;
+        option.textContent = year;
+        select.appendChild(option);
     }
-});
+}
+
+populateYearsSelect();

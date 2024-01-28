@@ -13,8 +13,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -82,15 +80,13 @@ public class VehicleController {
     public String showSearchResult(FilterDTO filters, Model model) {
         var vehicles = vehicleService.findWithFilters(filters);
 
-        List<State> states = Arrays.asList(State.values());
-
         model.addAttribute("vehicles", vehicles);
-        model.addAttribute("states", states);
 
         if(filters.state() != null) {
-            model.addAttribute("st", State.valueOf(filters.state()));
+            model.addAttribute("state", State.valueOf(filters.state()));
         }
-        model.addAttribute("mk", filters.make());
+        model.addAttribute("make", filters.make());
+        model.addAttribute("year", filters.year());
 
         return "listVehicles";
     }
